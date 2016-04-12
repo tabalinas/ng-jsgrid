@@ -1,2 +1,1 @@
-# ng-jsgrid
-JSGrid for Angular
+# JSGrid for Angular (Work in Progress)
