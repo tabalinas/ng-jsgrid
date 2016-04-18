@@ -5,6 +5,8 @@
         .directive("ngJsgrid", function() {
             return {
                 restrict: "A",
+                replace: false,
+                transclude: false,
                 scope: {
                     config: "=ngJsgrid"
                 },
