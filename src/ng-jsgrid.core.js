@@ -11,14 +11,13 @@
                     config: "=ngJsgrid"
                 },
                 link: function(scope, $element, attrs) {
+                    $element.jsGrid(scope.config);
 
                     $.each(scope.config, function(key) {
                         scope.$watch("config." + key, function(value) {
                             $element.jsGrid("option", key, value);
                         });
                     });
-
-                    $element.jsGrid(scope.config);
                 }
             };
         });
