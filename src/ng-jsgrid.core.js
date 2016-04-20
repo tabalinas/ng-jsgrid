@@ -1,21 +1,21 @@
 (function() {
-   "use strict";
+   'use strict';
 
-    angular.module("angular.jsgrid", [])
-        .directive("ngJsgrid", function() {
+    angular.module('angular.jsgrid', [])
+        .directive('ngJsgrid', function() {
             return {
-                restrict: "A",
+                restrict: 'A',
                 replace: false,
                 transclude: false,
                 scope: {
-                    config: "=ngJsgrid"
+                    config: '=ngJsgrid'
                 },
                 link: function(scope, $element, attrs) {
                     $element.jsGrid(scope.config);
 
                     $.each(scope.config, function(key) {
-                        scope.$watch("config." + key, function(value) {
-                            $element.jsGrid("option", key, value);
+                        scope.$watch('config.' + key, function(value) {
+                            $element.jsGrid('option', key, value);
                         });
                     });
                 }
