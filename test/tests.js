@@ -3,7 +3,7 @@ describe('ng-grid', function() {
     var $compile;
     var $scope;
 
-    beforeEach(module('angular.jsgrid'));
+    beforeEach(module('ngjsgrid'));
 
     beforeEach(inject(function(_$compile_, _$rootScope_){
         $compile = _$compile_;

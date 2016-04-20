@@ -1,7 +1,7 @@
 (function() {
    'use strict';
 
-    angular.module('angular.jsgrid', [])
+    angular.module('ngjsgrid', [])
         .directive('ngJsgrid', function() {
             return {
                 restrict: 'A',
