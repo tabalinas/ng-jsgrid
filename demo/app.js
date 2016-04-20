@@ -1,4 +1,4 @@
-var app = angular.module("app", ["angular.jsgrid"]);
+var app = angular.module("app", ["ngjsgrid"]);
 
 app.controller("MainCtrl", ["$scope", function($scope) {
     $scope.gridConfig = {
