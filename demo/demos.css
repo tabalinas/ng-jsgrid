@@ -12,7 +12,7 @@ body {
     height: 100%;
     padding: 10px;
     color: #262626;
-    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica;
+    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica, Sans-Serif;
     font-size: 14px;
     font-weight: 300;
 }
@@ -20,14 +20,14 @@ body {
 h1 {
     margin: 0 0 8px 0;
     font-size: 24px;
-    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica;
+    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica, Sans-Serif;
     font-weight: 300;
 }
 
 h2 {
     margin: 16px 0 8px 0;
     font-size: 18px;
-    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica;
+    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica, Sans-Serif;
     font-weight: 300;
 }
 
@@ -46,14 +46,14 @@ a:hover {
 }
 
 input, button, select {
-    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica;
+    font-family: 'Helvetica Neue Light', 'Open Sans', Helvetica, Sans-Serif;
     font-weight: 300;
     font-size: 14px;
     padding: 2px;
 }
 
 .navigation {
-    width: 200px;
+    width: 210px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -71,7 +71,7 @@ input, button, select {
     top: 0;
     right: 0;
     bottom: 0;
-    left: 200px;
+    left: 210px;
 }
 
 iframe[name='demo'] {
