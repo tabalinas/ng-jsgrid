@@ -1,6 +1,6 @@
 {
   "name": "ng-jsgrid",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "JSGrid for Angular",
   "main": "'src/ng-jsgrid.core.js'",
   "directories": {
