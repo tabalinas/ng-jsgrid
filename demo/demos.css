@@ -53,7 +53,7 @@ input, button, select {
 }
 
 .navigation {
-    width: 210px;
+    width: 220px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -71,7 +71,7 @@ input, button, select {
     top: 0;
     right: 0;
     bottom: 0;
-    left: 210px;
+    left: 220px;
 }
 
 iframe[name='demo'] {
