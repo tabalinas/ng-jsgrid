@@ -2,6 +2,9 @@
    'use strict';
 
     angular.module('ngjsgrid', [])
+        .factory('jsGrid', ['$window', function($window) {
+            return $window.jsGrid;
+        }])
         .directive('ngJsgrid', ["$timeout", function($timeout) {
             return {
                 restrict: 'A',
