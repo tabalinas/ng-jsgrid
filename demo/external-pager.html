@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html ng-app="app">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ng-jsgrid - External Pager Scenario</title>
+    <link rel="stylesheet" type="text/css" href="demos.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../external/jsgrid/jsgrid-1.4.1.css" />
+    <link rel="stylesheet" type="text/css" href="../external/jsgrid/jsgrid-theme-1.4.1.css" />
+
+    <style>
+        .external-pager {
+            margin: 10px 0;
+        }
+
+        .external-pager .jsgrid-pager-current-page {
+            background: #c4e2ff;
+            color: #fff;
+        }
+    </style>
+
+    <script src="../external/jquery/jquery-1.8.3.js"></script>
+    <script src="../external/angular/angular-1.2.16.js"></script>
+    <script src="../external/jsgrid/jsgrid-1.4.1.js"></script>
+
+    <script src="../src/ng-jsgrid.core.js"></script>
+
+    <script src="db.js"></script>
+
+    <script>
+        var app = angular.module("app", ["ngjsgrid"]);
+
+        app.controller("MainCtrl", ["$scope", function($scope) {
+            $scope.gridConfig = {
+                height: "70%",
+                width: "100%",
+                paging: true,
+                pageSize: 15,
+                pageButtonCount: 5,
+                pagerContainer: "#externalPager",
+                pagerFormat: "current page: {pageIndex} &nbsp;&nbsp; {first} {prev} {pages} {next} {last} &nbsp;&nbsp; total pages: {pageCount} total items: {itemCount}",
+                pagePrevText: "<",
+                pageNextText: ">",
+                pageFirstText: "<<",
+                pageLastText: ">>",
+                pageNavigatorNextText: "&#8230;",
+                pageNavigatorPrevText: "&#8230;",
+                fields: [
+                    { name: "Name", type: "text", width: 150 },
+                    { name: "Age", type: "number", width: 50 },
+                    { name: "Address", type: "text", width: 200 },
+                    { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
+                    { name: "Married", type: "checkbox", title: "Is Married" }
+                ],
+                data: db.clients
+            };
+        }]);
+    </script>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+    <h1>External Customized Pager</h1>
+    <div id="externalPager" class="external-pager"></div>
+
+    <div id="jsGrid" ng-jsgrid="gridConfig"></div>
+</body>
+</html>
