@@ -37,6 +37,16 @@
 
         app.controller("MainCtrl", ["$scope", "$compile", "jsGrid", function($scope, $compile, jsGrid) {
 
+            var createDatePickerModel = function(value) {
+                return {
+                    opened: false,
+                    value: new Date(value),
+                    toggle: function() {
+                        this.opened = !this.opened;
+                    }
+                };
+            };
+
             var MyDateField = function(config) {
                 jsGrid.Field.call(this, config);
             };
@@ -50,22 +60,22 @@
                     return new Date(value).toDateString();
                 },
 
-                insertTemplate: function(value) {
-                    $scope.insertDate = new Date();
-                    return $compile("<input uib-datepicker-popup='dd-MMMM-yyyy' ng-model='insertDate' />")($scope);
+                insertTemplate: function() {
+                    $scope.insertDatepicker = createDatePickerModel();
+                    return $compile("<input uib-datepicker-popup='dd-MMMM-yyyy' datepicker-append-to-body='true' popup-placement='bottom' ng-model='insertDatepicker.value' is-open='insertDatepicker.opened' ng-click='insertDatepicker.toggle()' />")($scope);
                 },
 
                 editTemplate: function(value) {
-                    $scope.editDate = new Date(value);
-                    return $compile("<input uib-datepicker-popup='dd-MMMM-yyyy' ng-model='editDate' />")($scope);
+                    $scope.editDatepicker = createDatePickerModel(value);
+                    return $compile("<input uib-datepicker-popup='dd-MMMM-yyyy' datepicker-append-to-body='true' popup-placement='bottom' ng-model='editDatepicker.value' is-open='editDatepicker.opened' ng-click='editDatepicker.toggle()' />")($scope);
                 },
 
                 insertValue: function() {
-                    return $scope.insertDate;
+                    return $scope.insertDatepicker.value;
                 },
 
                 editValue: function() {
-                    return $scope.editDate;
+                    return $scope.editDatepicker.value;
                 }
             });
 
@@ -91,6 +101,6 @@
 </head>
 <body ng-controller="MainCtrl as ctrl">
     <h1>Custom Grid DateField</h1>
-    <div id="jsGrid" ng-jsgrid="gridConfig"></div>
+    <div ng-jsgrid="gridConfig"></div>
 </body>
 </html>
