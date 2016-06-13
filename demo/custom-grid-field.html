@@ -1,0 +1,96 @@
+﻿<!doctype html>
+<html ng-app="app">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ng-jsgrid - Custom Grid Field Scenario</title>
+    <link rel="stylesheet" type="text/css" href="demos.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="../external/jsgrid/jsgrid-1.4.1.css" />
+    <link rel="stylesheet" type="text/css" href="../external/jsgrid/jsgrid-theme-1.4.1.css" />
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .sort-panel {
+            padding: 10px;
+            margin: 10px 0;
+            background: #fcfcfc;
+            border: 1px solid #e9e9e9;
+            display: inline-block;
+        }
+    </style>
+
+    <script src="../external/jquery/jquery-1.11.2.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
+    <script src="../external/jsgrid/jsgrid-1.4.1.js"></script>
+    <script src="../src/ng-jsgrid.core.js"></script>
+
+    <script src="db.js"></script>
+
+    <script>
+        var app = angular.module("app", ["ngAnimate", "ui.bootstrap", "ngjsgrid"]);
+
+        app.controller("MainCtrl", ["$scope", "$compile", "jsGrid", function($scope, $compile, jsGrid) {
+
+            var MyDateField = function(config) {
+                jsGrid.Field.call(this, config);
+            };
+
+            MyDateField.prototype = new jsGrid.Field({
+                sorter: function(date1, date2) {
+                    return new Date(date1) - new Date(date2);
+                },
+
+                itemTemplate: function(value) {
+                    return new Date(value).toDateString();
+                },
+
+                insertTemplate: function(value) {
+                    $scope.insertDate = new Date();
+                    return $compile("<input uib-datepicker-popup='dd-MMMM-yyyy' ng-model='insertDate' />")($scope);
+                },
+
+                editTemplate: function(value) {
+                    $scope.editDate = new Date(value);
+                    return $compile("<input uib-datepicker-popup='dd-MMMM-yyyy' ng-model='editDate' />")($scope);
+                },
+
+                insertValue: function() {
+                    return $scope.insertDate;
+                },
+
+                editValue: function() {
+                    return $scope.editDate;
+                }
+            });
+
+            jsGrid.fields.myDateField = MyDateField;
+
+            $scope.gridConfig = {
+                height: "70%",
+                width: "100%",
+                inserting: true,
+                editing: true,
+                sorting: true,
+                paging: true,
+                fields: [
+                    { name: "Account", width: 150, align: "center" },
+                    { name: "Name", type: "text" },
+                    { name: "RegisterDate", type: "myDateField", width: 100, align: "center" },
+                    { type: "control", editButton: false, modeSwitchButton: false }
+                ],
+                data: db.users
+            };
+        }]);
+    </script>
+</head>
+<body ng-controller="MainCtrl as ctrl">
+    <h1>Custom Grid DateField</h1>
+    <div id="jsGrid" ng-jsgrid="gridConfig"></div>
+</body>
+</html>
