@@ -21,7 +21,7 @@
 
     <script src="../external/jquery/jquery-1.8.3.js"></script>
     <script src="../external/angular/angular-1.2.16.js"></script>
-    <script src="../external/jsgrid/jsgrid-1.4.1.js"></script>
+    <script src="../external/jsgrid/jsgrid-1.5.0.js"></script>
 
     <script src="../src/ng-jsgrid.core.js"></script>
 
@@ -36,6 +36,9 @@
                 width: "100%",
                 autoload: true,
                 selecting: false,
+                onInit: function(e) {
+                    $scope.gridInstance = e.grid;
+                },
                 controller: db,
                 fields: [
                     { name: "Name", type: "text", width: 150 },
@@ -49,7 +52,7 @@
             $scope.sortingField = "Name";
 
             $scope.sort = function() {
-                $("#jsGrid").jsGrid("sort", $scope.sortingField);
+                $scope.gridInstance.sort($scope.sortingField);
             };
         }]);
     </script>
