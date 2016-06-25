@@ -461,7 +461,6 @@
             var $result = $("<tr>").addClass(this.headerRowClass);
 
             this._eachField(function(field, index) {
-                debugger;
                 var $th = this._prepareCell("<th>", field, "headercss")
                     .append(this.renderTemplate(field.headerTemplate, field))
                     .appendTo($result);
