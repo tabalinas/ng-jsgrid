@@ -5,7 +5,7 @@
         .factory('jsGrid', ['$window', function($window) {
             return $window.jsGrid;
         }])
-        .directive('ngJsgrid', ["$timeout", function($timeout) {
+        .directive('ngJsgrid', ["$timeout", "$compile", "jsGrid", function($timeout, $compile, jsGrid) {
             return {
                 restrict: 'A',
                 replace: false,
@@ -16,7 +16,15 @@
                 link: function(scope, $element, attrs) {
                     var linking = true;
 
-                    $element.jsGrid(scope.config);
+                    $element.jsGrid($.extend(scope.config, {
+                        renderTemplate: function(source, context) {
+                            var result = jsGrid.Grid.prototype.renderTemplate.apply(this, arguments);
+                            if(typeof result != "string")
+                                return result;
+
+                            return $compile("<div>" + result + "</div>")(scope.$parent).contents();
+                        }
+                    }));
 
                     $.each(scope.config, function(key) {
                         scope.$watch('config.' + key, function(value) {

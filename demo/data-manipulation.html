@@ -24,7 +24,7 @@
     <script>
         var app = angular.module("app", ["ui.bootstrap", "ngjsgrid"]);
 
-        app.controller("MainCtrl", function($scope, $uibModal, $compile) {
+        app.controller("MainCtrl", function($scope, $uibModal) {
             $scope.gridConfig = {
                 height: "70%",
                 width: "100%",
@@ -52,8 +52,7 @@
                         modeSwitchButton: false,
                         editButton: false,
                         headerTemplate: function() {
-                            var linkFn = $compile("<button type='button' class='btn btn-success' ng-click='showDetailsDialog(\"Add\", {})'>Add</button>");
-                            return linkFn($scope);
+                            return "<button type='button' class='btn btn-success' ng-click='showDetailsDialog(\"Add\", {})'>Add</button>";
                         }
                     }
                 ]
