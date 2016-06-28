@@ -64,12 +64,13 @@
                 },
 
                 insertTemplate: function() {
-                    return "<input uib-datepicker-popup='dd-MMMM-yyyy' datepicker-append-to-body='true' popup-placement='bottom' ng-model='insertDatepicker.value' is-open='insertDatepicker.opened' ng-click='insertDatepicker.toggle()' />";
+                    $scope.insertDatepicker.value = new Date();
+                    return "<input uib-datepicker-popup='dd-MMMM-yyyy' popup-placement='bottom' ng-model='insertDatepicker.value' is-open='insertDatepicker.opened' ng-click='insertDatepicker.toggle()' />";
                 },
 
                 editTemplate: function(value) {
                     $scope.editDatepicker.value = new Date(value);
-                    return "<input uib-datepicker-popup='dd-MMMM-yyyy' datepicker-append-to-body='true' popup-placement='bottom' ng-model='editDatepicker.value' is-open='editDatepicker.opened' ng-click='editDatepicker.toggle()' />";
+                    return "<input uib-datepicker-popup='dd-MMMM-yyyy' popup-placement='bottom' ng-model='editDatepicker.value' is-open='editDatepicker.opened' ng-click='editDatepicker.toggle()' />";
                 },
 
                 insertValue: function() {
