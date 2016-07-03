@@ -96,6 +96,7 @@
         heading: true,
         headerRowRenderer: null,
         headerRowClass: "jsgrid-header-row",
+        headerCellClass: "jsgrid-header-cell",
 
         filtering: false,
         filterRowRenderer: null,
@@ -116,6 +117,7 @@
         selectedRowClass: "jsgrid-selected-row",
         oddRowClass: "jsgrid-row",
         evenRowClass: "jsgrid-alt-row",
+        cellClass: "jsgrid-cell",
 
         sorting: false,
         sortableClass: "jsgrid-header-sortable",
@@ -461,7 +463,7 @@
             var $result = $("<tr>").addClass(this.headerRowClass);
 
             this._eachField(function(field, index) {
-                var $th = this._prepareCell("<th>", field, "headercss")
+                var $th = this._prepareCell("<th>", field, "headercss", this.headerCellClass)
                     .append(this.renderTemplate(field.headerTemplate, field))
                     .appendTo($result);
 
@@ -476,8 +478,9 @@
             return $result;
         },
 
-        _prepareCell: function(cell, field, cssprop) {
+        _prepareCell: function(cell, field, cssprop, cellClass) {
             return $(cell).css("width", field.width)
+                .addClass(cellClass || this.cellClass)
                 .addClass((cssprop && field[cssprop]) || field.css)
                 .addClass(field.align ? ("jsgrid-align-" + field.align) : "");
         },
@@ -1150,8 +1153,13 @@
                 if(!field.validate)
                     return;
 
+                var fieldValue = this._getItemFieldValue(item, field);
+
+                if(fieldValue === undefined)
+                    return;
+
                 var errors = this._validation.validate($.extend({
-                    value: this._getItemFieldValue(item, field),
+                    value: fieldValue,
                     rules: field.validate
                 }, args));
 
