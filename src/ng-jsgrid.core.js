@@ -19,7 +19,7 @@
                     $element.jsGrid($.extend(scope.config, {
                         renderTemplate: function(source, context) {
                             var result = jsGrid.Grid.prototype.renderTemplate.apply(this, arguments);
-                            if(typeof result != "string")
+                            if(typeof result !== "string")
                                 return result;
 
                             return $compile("<div>" + result + "</div>")(scope.$parent).contents();
