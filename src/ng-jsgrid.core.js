@@ -17,12 +17,14 @@
                     var linking = true;
 
                     $element.jsGrid($.extend(scope.config, {
-                        renderTemplate: function(source, context) {
-                            var result = jsGrid.Grid.prototype.renderTemplate.apply(this, arguments);
-                            if(typeof result !== "string")
-                                return result;
+                        renderTemplate: function(source, context, args) {
+                            var template = jsGrid.Grid.prototype.renderTemplate.apply(this, arguments);
+                            if(typeof template !== "string")
+                                return template;
 
-                            return $compile("<div>" + result + "</div>")(scope.$parent).contents();
+                            var templateScope = scope.$parent.$new();
+                            angular.extend(templateScope, args);
+                            return $compile("<div>" + template + "</div>")(templateScope).contents();
                         }
                     }));
 
